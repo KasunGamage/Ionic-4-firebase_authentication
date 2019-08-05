@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FirebaseAuthService } from 'src/app/services/auth/firebase-auth.service';
-import { UserRequest } from '../../models/requests/user-request';
-import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { Component, OnInit } from "@angular/core";
+import { FirebaseAuthService } from "src/app/services/auth/firebase-auth.service";
+import { UserRequest } from "../../models/requests/user-request";
+import { Router } from "@angular/router";
+import { AlertController } from "@ionic/angular";
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  selector: "app-login",
+  templateUrl: "./login.page.html",
+  styleUrls: ["./login.page.scss"]
 })
 export class LoginPage implements OnInit {
-  user: UserRequest;
+
+  loginForm = new FormGroup({
+    email: new FormControl(""),
+    password: new FormControl("")
+  });
 
   constructor(
     private firebaseAuth: FirebaseAuthService,
@@ -18,51 +23,42 @@ export class LoginPage implements OnInit {
     private alertController: AlertController
   ) {}
 
-  ngOnInit() {
-    this.user = new UserRequest();
-  }
-
-  login(): void {
-    this.firebaseAuth.login(this.user);
-  }
+  ngOnInit() {}
 
   routeToRegister() {
-    this.router.navigate(['sign-up']);
+    this.router.navigate(["sign-up"]);
   }
 
-  changePassword() {
-    this.presentAlertPrompt();
-  }
-
-  async presentAlertPrompt() {
+  async changePassword() {
     const alert = await this.alertController.create({
-      header: 'Reset Password',
+      header: "Reset Password",
       inputs: [
         {
-          name: this.user.email,
-          type: 'email',
-          placeholder: 'Type email here'
+          name: 'email',
+          type: 'email'
         }
       ],
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: "Cancel",
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
-            console.log('Confirm Cancel');
           }
         },
         {
-          text: 'Send link',
-          handler: () => {
-            console.log('Confirm Ok');
-            this.firebaseAuth.changePassword(this.user.email);
+          text: "Send link",
+          handler: (res: any) => {
+            this.firebaseAuth.changePassword(res.email);
           }
         }
       ]
     });
 
     await alert.present();
+  }
+
+  onSubmit() {
+    this.firebaseAuth.login(this.loginForm.value);
   }
 }

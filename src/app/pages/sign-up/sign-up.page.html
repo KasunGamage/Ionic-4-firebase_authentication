@@ -1,20 +1,43 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>sign-up</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Sign Up</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>Email Address</ion-label>
-    <ion-input type="text" [(ngModel)]="user.email"></ion-input>
-  </ion-item>
+  
+  <ion-card>
+    <img
+      src="data:image/png;base64,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"
+      alt="" />
 
-  <ion-item>
-    <ion-label>Password</ion-label>
-    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
-  </ion-item>
+    <ion-card-content>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+          <ion-item>
+            <ion-label position="stacked">Email Address<ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" formControlName="email"></ion-input>
+          </ion-item>
 
-  <ion-button (click)="register()">Register</ion-button>
-  <ion-button (click)="login()">Login</ion-button>
+          <ion-item>
+            <ion-label position="stacked">Password <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="password" formControlName="password"></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <div class="ion-padding">
+          <ion-button expand="block" type="submit" class="ion-no-margin">Sign Up
+          </ion-button>
+        </div>
+        
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+
 </ion-content>
