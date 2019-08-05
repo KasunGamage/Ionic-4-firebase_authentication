@@ -1,7 +1,7 @@
 # Ionic-4-firebase_authentication
 This a sample hybrid mobile application project based on ionic 4 and firebase.
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 _Currently this project is using the latest versions of all: Ionic 4 and Angular 7_
 
