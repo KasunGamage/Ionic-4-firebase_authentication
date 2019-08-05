@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserRequest } from '../../models/requests/user-request';
 import { FirebaseAuthService } from '../../services/auth/firebase-auth.service';
-import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { MenuController } from "@ionic/angular";
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
@@ -16,16 +16,26 @@ export class SignUpPage implements OnInit {
     password: new FormControl('',[Validators.required, Validators.minLength(6)])
   });
 
-
   constructor(
     private firebaseAuth: FirebaseAuthService,
-    private router: Router
+    private menuController: MenuController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-  onSubmit(){
+  ionViewWillEnter() {
+    this.menuController.enable(false);
+  }
+
+  onSubmit() {
     this.firebaseAuth.register(this.registerForm.value);
   }
+
+  ionViewWillLeave() {
+    this.menuController.enable(true);
+  }
+
+  ngOnDestroy() {}
 
 }

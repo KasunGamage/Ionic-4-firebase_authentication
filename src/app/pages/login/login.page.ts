@@ -1,8 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FirebaseAuthService } from "src/app/services/auth/firebase-auth.service";
-import { UserRequest } from "../../models/requests/user-request";
 import { Router } from "@angular/router";
-import { AlertController } from "@ionic/angular";
+import { AlertController, MenuController } from "@ionic/angular";
 import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
@@ -10,7 +9,7 @@ import { FormControl, FormGroup } from "@angular/forms";
   templateUrl: "./login.page.html",
   styleUrls: ["./login.page.scss"]
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
 
   loginForm = new FormGroup({
     email: new FormControl(""),
@@ -20,10 +19,16 @@ export class LoginPage implements OnInit {
   constructor(
     private firebaseAuth: FirebaseAuthService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private menuController: MenuController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(false);
+  }
 
   routeToRegister() {
     this.router.navigate(["sign-up"]);
@@ -60,5 +65,12 @@ export class LoginPage implements OnInit {
 
   onSubmit() {
     this.firebaseAuth.login(this.loginForm.value);
+  }
+
+  ionViewWillLeave() {
+    this.menuController.enable(true);
+  }
+
+  ngOnDestroy() {
   }
 }
