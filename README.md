@@ -55,7 +55,5 @@ $ ionic serve
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-[<img src="https://avatars2.githubusercontent.com/u/19595615?v=4" width="100px;"/><br /><sub><b>Stephan Strate</b></sub>](https://www.stephan-strate.de/)<br />[💻](https://github.com/yannbf/ionic3-components/commits?author=stephan-strate "Code") |
+[<img src="https://avatars3.githubusercontent.com/u/37896307?v=4" width="100px;"/><br /><sub><b>Stephan Strate</b></sub>](https://www.linkedin.com/in/kasun-gamage95/)<br />[💻](https://github.com/KasunGamage/Ionic-4-firebase_authentication/commits?author=Kasun-Gamage "Code") |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
