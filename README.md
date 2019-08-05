@@ -1,26 +1,9 @@
 # Ionic-4-firebase_authentication
 This a sample hybrid mobile application project based on ionic 4 and firebase.
 
-# Ionic Advanced Components [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badge/)
 [![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors)
 
-_Currently this project is using the latest versions of all: Ionic and Angular 5_
-
-
-## Demo
-If you just want to check this project out, you can see the online demo at https://yannbf.github.io/ionic3-components or use [Ionic View](http://view.ionic.io/) with the code **bd1b6d71**.
-
-Please notice that some plugins may **only work** when using a real device, so don't expect everything to work on ionic view or the browser.
-
-****
-
-This repository was made in order to help people learn and speed up their development process.
-You will find many many different components, pages, pipes, services, of which can be very useful to you. Note though that these are all experimental!
-
-The content here is a mix of tutorials found online, a few adapted codepen stuff, a few dribbble inspired layouts, and also other stuff made by the amazing contributors of this project.
-
-**HOPEFULLY** you will like this repo and feel like contributing, so please if you can, contribute so we can have even more amazing content!
-
+_Currently this project is using the latest versions of all: Ionic 4 and Angular 7_
 
 ## Setup
 
