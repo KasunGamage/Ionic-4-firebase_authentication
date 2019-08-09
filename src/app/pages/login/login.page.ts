@@ -21,14 +21,16 @@ export class LoginPage implements OnInit, OnDestroy {
     private router: Router,
     private alertController: AlertController,
     private menuController: MenuController
-  ) {}
+  ) {
+    this.menuController.enable(false);
+  }
 
   ngOnInit() {
   }
 
-  ionViewWillEnter() {
-    this.menuController.enable(false);
-  }
+  // ionViewDidEnter() {
+  //   this.menuController.enable(false);
+  // }
 
   routeToRegister() {
     this.router.navigate(["sign-up"]);
@@ -69,8 +71,5 @@ export class LoginPage implements OnInit, OnDestroy {
 
   ionViewWillLeave() {
     this.menuController.enable(true);
-  }
-
-  ngOnDestroy() {
   }
 }

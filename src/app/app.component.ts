@@ -56,10 +56,8 @@ export class AppComponent {
   checkAuthState(): void {
     this.firebaseAuth.checkAuthState().subscribe((user: firebase.User) => {
       if (user) {
-        console.log('The user is logged in!');
         this.navCtrl.navigateRoot('home');
       } else {
-        console.log('The user is not logged in!');
         this.navCtrl.navigateRoot('login');
       }
     }, err => {
@@ -68,7 +66,6 @@ export class AppComponent {
         err.message,
         'bottom'
       );
-      console.error(err);
     });
   }
 

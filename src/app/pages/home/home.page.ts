@@ -13,7 +13,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.user = this.fbAuth.getAuthInfo();
-    console.log(this.user);
   }
 
 }

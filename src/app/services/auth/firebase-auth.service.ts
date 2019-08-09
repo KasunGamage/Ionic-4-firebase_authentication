@@ -26,7 +26,6 @@ export class FirebaseAuthService {
         this.navCtrl.navigateRoot('home');
       }
     } catch (err) {
-      console.error(err);
       this.toast.presentToastWithOptions('Login Error', err.message, 'bottom');
     }
   }
@@ -47,7 +46,6 @@ export class FirebaseAuthService {
         err.message,
         'bottom'
       );
-      console.error(err);
     }
   }
 
@@ -60,7 +58,6 @@ export class FirebaseAuthService {
         err.message,
         'bottom'
       );
-      console.error(err);
     }
   }
 
@@ -77,7 +74,6 @@ export class FirebaseAuthService {
         err.message,
         'bottom'
       );
-      console.error(err);
     }
   }
 
