@@ -1,44 +1,41 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { FirebaseAuthService } from "src/app/services/auth/firebase-auth.service";
-import { Router } from "@angular/router";
-import { AlertController, MenuController } from "@ionic/angular";
-import { FormControl, FormGroup } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { FirebaseAuthService } from 'src/app/services/auth/firebase-auth.service';
+import { Router } from '@angular/router';
+import { AlertController, MenuController, NavController } from '@ionic/angular';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ToastService } from 'src/app/services/utilities/toast.service';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.page.html",
-  styleUrls: ["./login.page.scss"]
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss']
 })
-export class LoginPage implements OnInit, OnDestroy {
-
+export class LoginPage implements OnInit {
   loginForm = new FormGroup({
-    email: new FormControl(""),
-    password: new FormControl("")
+    email: new FormControl(''),
+    password: new FormControl('')
   });
 
   constructor(
     private firebaseAuth: FirebaseAuthService,
     private router: Router,
     private alertController: AlertController,
-    private menuController: MenuController
-  ) {
+    private menuController: MenuController,
+    private navCtrl: NavController,
+    private toast: ToastService
+  ) {}
+
+  ngOnInit() {
     this.menuController.enable(false);
   }
 
-  ngOnInit() {
-  }
-
-  // ionViewDidEnter() {
-  //   this.menuController.enable(false);
-  // }
-
   routeToRegister() {
-    this.router.navigate(["sign-up"]);
+    this.router.navigate(['sign-up']);
   }
 
-  async changePassword() {
+  async showAlert() {
     const alert = await this.alertController.create({
-      header: "Reset Password",
+      header: 'Reset Password',
       inputs: [
         {
           name: 'email',
@@ -47,16 +44,15 @@ export class LoginPage implements OnInit, OnDestroy {
       ],
       buttons: [
         {
-          text: "Cancel",
-          role: "cancel",
-          cssClass: "secondary",
-          handler: () => {
-          }
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {}
         },
         {
-          text: "Send link",
+          text: 'Send link',
           handler: (res: any) => {
-            this.firebaseAuth.changePassword(res.email);
+            this.changePassword(res);
           }
         }
       ]
@@ -65,8 +61,29 @@ export class LoginPage implements OnInit, OnDestroy {
     await alert.present();
   }
 
-  onSubmit() {
-    this.firebaseAuth.login(this.loginForm.value);
+  async onSubmit() {
+    try {
+      const success = await this.firebaseAuth.login(this.loginForm.value);
+      if (success) {
+        this.toast.presentToastWithOptions(
+          'Success',
+          'Login Success!',
+          'bottom'
+        );
+        this.navCtrl.navigateRoot('home');
+      }
+    } catch (error) {
+      // throw to global handler
+      throw error;
+    }
+  }
+
+  async changePassword(res) {
+    try {
+      await this.firebaseAuth.changePassword(res.email);
+    } catch (error) {
+      throw error;
+    }
   }
 
   ionViewWillLeave() {

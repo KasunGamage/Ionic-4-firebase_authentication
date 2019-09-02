@@ -47,26 +47,32 @@ export class AppComponent {
     });
   }
 
-  logout(p: any): void {
+  async logout(p: any) {
     if (p.title === 'Logout') {
-      this.firebaseAuth.logout();
+      try {
+        await this.firebaseAuth.logout();
+      } catch (error) {
+        throw error;
+      }
     }
   }
 
   checkAuthState(): void {
-    this.firebaseAuth.checkAuthState().subscribe((user: firebase.User) => {
-      if (user) {
-        this.navCtrl.navigateRoot('home');
-      } else {
-        this.navCtrl.navigateRoot('login');
+    this.firebaseAuth.checkAuthState().subscribe(
+      (user: firebase.User) => {
+        if (user) {
+          this.navCtrl.navigateRoot('home');
+        } else {
+          this.navCtrl.navigateRoot('login');
+        }
+      },
+      err => {
+        this.toast.presentToastWithOptions(
+          'checkAuthState Error',
+          err.message,
+          'bottom'
+        );
       }
-    }, err => {
-      this.toast.presentToastWithOptions(
-        'checkAuthState Error',
-        err.message,
-        'bottom'
-      );
-    });
+    );
   }
-
 }

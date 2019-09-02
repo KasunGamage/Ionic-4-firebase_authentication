@@ -7,11 +7,15 @@ import { FirebaseAuthService } from '../../services/auth/firebase-auth.service';
 })
 export class HomePage implements OnInit {
 
-  user: any;
+  user: firebase.User;
 
   constructor(private fbAuth: FirebaseAuthService) {}
 
   ngOnInit() {
+    this.init();
+  }
+
+  init() {
     this.user = this.fbAuth.getAuthInfo();
   }
 

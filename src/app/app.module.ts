@@ -12,8 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
-// import { environment } from 'src/environments/environment.prod';
 import { environment } from 'src/environments/environment';
+import { ErrorHandler } from '@angular/core';
+import { GlobalErrorHandler } from './services/utilities/global-error-handler.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,7 +29,8 @@ import { environment } from 'src/environments/environment';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],
   bootstrap: [AppComponent]
 })
